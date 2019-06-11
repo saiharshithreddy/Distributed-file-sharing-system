@@ -1,0 +1,31 @@
+
+syntax = "proto3";
+
+// The heartbeat service definition.
+service HearBeat {
+  // Sends status
+  rpc getStatus (HeartBeatRequest) returns (HeartBeatResponse) {}
+}
+
+// The request message containing ip address and leader status
+message HeartBeatRequest {
+  string ip = 1;
+  bool leader = 2;
+}
+
+// The response message containing the status of the server
+message HeartBeatResponse {
+  string ip = 1;
+  bool live = 2; 
+  float cpu_usage = 3;
+  float disk_space = 4; 
+  int32 num_process = 5;
+  int32 num_thread = 6;
+  float idle = 7;
+  float tot_mem = 8;
+  float used_mem = 9;
+  float data_read_per_sec = 10;
+  float data_write_per_sec = 11;
+  float data_recieve_per_sec = 12;
+  float data_sent_per_sec = 13;
+}

@@ -1,0 +1,33 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option optimize_for = SPEED;
+package route;
+
+// a service interface (contract) that represents differ types of 
+//  request-response configurations (blocking, streaming)
+
+service RouteService {
+   // basic grpc call with blocking
+   rpc request(Route) returns (Route) {}
+
+   // the response may contain large amounts of data hence a
+   // streaming return (non-blocking return)
+   rpc requestStreamFrom(Route) returns (stream Route) {}
+
+   // the grpc.io chat example for bi-directional communication. Hmmm, is this
+   // why everyone selected this? However, is it enough?
+   // TODO add code
+}
+
+// basic message correspondence between two points. Additional metadata 
+// and routing options can be added.
+
+message Route {
+  int64 id = 1;
+  int64 origin = 2;
+  int64 destination = 3;
+  int64 seqnum = 4;
+  string path = 5;
+  bytes payload = 6;
+}
+
